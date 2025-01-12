@@ -23,24 +23,22 @@ import {
     FormControl,
 } from "@/components/ui/form";
 import Link from "next/link";
-
-const formSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(1, "Required"),
-});
-
+import { loginSchema } from "../schemas";
+import { useLogin } from "../api/use-login";
 
 export const SignInCard = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const { mutate } = useLogin();
+
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
             password: "",
         },
     });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log({ values });
+    const onSubmit = (values: z.infer<typeof loginSchema>) => {
+        mutate({json: values});
     }
 
     return (
@@ -65,7 +63,7 @@ export const SignInCard = () => {
                                         <Input
                                             {...field}
                                             type="email"
-                                            placeholder="Enter email address"
+                                            placeholder="Email"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -81,16 +79,14 @@ export const SignInCard = () => {
                                         <Input
                                             {...field}
                                             type="password"
-                                            placeholder="Enter password"
+                                            placeholder="Password"
                                         />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={false} size="lg" className="w-full">
-                            Login
-                        </Button>
+                        <Button type="submit">Sign In</Button>
                     </form>
                 </Form>
             </CardContent>
