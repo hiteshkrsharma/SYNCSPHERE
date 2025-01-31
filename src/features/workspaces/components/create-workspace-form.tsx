@@ -56,6 +56,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
         mutate({ form: finalValues }, {
             onSuccess: () => {
                 form.reset();
+                onCancel?.();
                 // TODO: Redirect to new workspace
             }
         });
