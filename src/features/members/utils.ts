@@ -17,7 +17,7 @@ export const getMember = async ({
         DATABASE_ID,
         MEMBERS_ID,
         [
-            Query.equal("WorkspaceId", workspaceId),
+            Query.equal("workspaceId", workspaceId),
             Query.equal("userId", userId),
          ],
     );
