@@ -57,7 +57,7 @@ const app = new Hono()
         const file = await storage.createFile(
           IMAGES_BUCKET_ID,
           ID.unique(),
-          image
+          image,
         );
 
         const arrayBuffer = await storage.getFilePreview(
@@ -105,7 +105,7 @@ const app = new Hono()
       const storage = c.get("storage");
       const user = c.get("user");
 
-      const {workspaceId} = c.req.param();
+      const { workspaceId } = c.req.param();
       const { name, image } = c.req.valid("form");
 
       const member = await getMember({
@@ -115,7 +115,7 @@ const app = new Hono()
       });
 
       if (!member || member.role !== MemberRole.ADMIN) {
-        return c.json({ error: "Unauthorized" }, 401);
+        return c.json({ error: "Unauthorized"}, 401);
       }
 
       let uploadedImageUrl: string | undefined;
@@ -124,7 +124,7 @@ const app = new Hono()
         const file = await storage.createFile(
           IMAGES_BUCKET_ID,
           ID.unique(),
-          image
+          image,
         );
 
         const arrayBuffer = await storage.getFilePreview(
@@ -132,21 +132,24 @@ const app = new Hono()
           file.$id
         );
 
-        uploadedImageUrl = `data:image/png;base64,${Buffer.from( arrayBuffer ).toString("base64")}`;
+        uploadedImageUrl = `data:image/png;base64,${Buffer.from(
+          arrayBuffer
+        ).toString("base64")}`;
       } else {
         uploadedImageUrl = image;
       }
-        const workspace = await databases.updateDocument (
-          DATABASE_ID,
-          WORKSPACES_ID,
-          workspaceId,
-          {
-            name,
-            imageUrl: uploadedImageUrl
-          }
-        );
 
-        return c.json({ data: workspace });
+      const workspace = await databases.updateDocument(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+        {
+          name,
+          imageUrl: uploadedImageUrl
+        }
+      );
+
+      return c.json({ data: workspace });
     }
   );
 

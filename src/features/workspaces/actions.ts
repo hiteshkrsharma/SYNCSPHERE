@@ -5,7 +5,7 @@ import { Databases, Client, Query, Account } from "node-appwrite";
 import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
 import { getMember } from "@/features/members/utils";
-import { Workspace } from "./type";
+import { Workspace } from "./types";
 
 export const getWorkspaces = async () => {
   try {
@@ -47,7 +47,7 @@ export const getWorkspaces = async () => {
 };
 
 interface GetWorkspaceProps {
-  workspaceId: string;
+     workspaceId: string;
 };
 
 export const getWorkspace = async ({ workspaceId }: GetWorkspaceProps) => {
@@ -76,13 +76,16 @@ export const getWorkspace = async ({ workspaceId }: GetWorkspaceProps) => {
     }
 
     const workspace = await databases.getDocument<Workspace>(
-        DATABASE_ID, 
-        MEMBERS_ID, 
-        workspaceId,
-      );
+      DATABASE_ID,
+      WORKSPACES_ID,
+      workspaceId,
+    );
 
     return workspace;
   } catch {
     return null;
-  }
+    }
 };
+
+
+

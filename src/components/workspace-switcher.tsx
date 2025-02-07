@@ -1,4 +1,5 @@
 "use client";
+
 import { RiAddCircleFill } from "react-icons/ri";
 import { WorkspaceAvatar } from "@/features/workspaces/components/workspace-avatar";
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
