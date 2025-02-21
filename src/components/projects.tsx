@@ -8,7 +8,9 @@ import { RiAddCircleFill } from "react-icons/ri";
 
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+
 import { useCreateProjectModal } from "@/features/projects/hooks/use-create-project-modal";
+import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
 export const Projects = () => {
   const projectId = null;
@@ -31,7 +33,7 @@ export const Projects = () => {
         />
       </div>
       {data?.documents.map((project) => {
-        const href = `/workspaces/${workspaceId}/projects/${projectId}`;  
+        const href = `/workspaces/${workspaceId}/projects/${project.$id}`;  
         const isActive = pathname === href;  
 
         return (
@@ -42,6 +44,7 @@ export const Projects = () => {
               isActive && "bg-white shadow-sm hover:opacity-100 text-primary"
             )}
             >
+              <ProjectAvatar image={project.imageUrl} name={project.name} />
               <span className="truncate">{project.name}</span>
             </div>
           </Link>
