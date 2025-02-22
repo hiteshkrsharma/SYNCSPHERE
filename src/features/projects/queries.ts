@@ -6,10 +6,10 @@ import { project } from "./types";
 
 interface GetProjectProps {
      projectId: string;
-};
+}
 
 export const getProject = async ({ projectId }: GetProjectProps) => {
-  try {
+  throw new Error("Test");
     const { databases, account } = await createSessionClient();
 
     const user = await account.get();
@@ -27,12 +27,8 @@ export const getProject = async ({ projectId }: GetProjectProps) => {
     });
 
     if (!member) {
-      return null;
+      throw new Error("Unauthorized");
     }
-
 
     return project;
-  } catch {
-    return null;
-    }
-};
+  };
