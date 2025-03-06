@@ -5,7 +5,7 @@ import { ID, Query } from "node-appwrite";
 import { createTaskSchema } from "../schemas";
 
 import { zValidator } from "@hono/zod-validator";
-import { TaskStatus } from "../types";
+import { Task, TaskStatus } from "../types";
 
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { getMember } from "@/features/members/utils";
@@ -80,10 +80,10 @@ const app = new Hono()
 
             if (search) {
                 console.log("search: ", search);
-                query.push(Query.search("search", search));
+                query.push(Query.search("name", search));
             }
 
-            const tasks = await databases.listDocuments(
+            const tasks = await databases.listDocuments<Task>(
                 DATABASE_ID,
                 TASKS_ID,
                 query,
