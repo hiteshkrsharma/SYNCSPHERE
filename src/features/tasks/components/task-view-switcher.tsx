@@ -5,7 +5,7 @@ import { Loader, PlusIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
 
 import { DottedSeparator } from "@/components/dotted-separator";
-import { useGetTasks } from "../api/use-get-task";
+import { useGetTasks } from "../api/use-get-tasks";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCreateTaskModal } from "../hooks/use-create-task-modal";

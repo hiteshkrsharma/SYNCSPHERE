@@ -2,15 +2,17 @@
 
 import { ResponsiveModal } from "@/components/responsive-modal";
 
-import { useCreateTaskModal } from "../hooks/use-create-task-modal";
-import { CreateTaskFormWrapper } from "./create-task-form-wrapper";
+import { useEditTaskModal } from "../hooks/use-edit-task-modal";
+import { EditTaskFormWrapper } from "./edit-task-form-wrapper";
 
 export const EditTaskModal = () => {
-    const { isOpen, setIsOpen, close } = useCreateTaskModal();
+    const { taskId, close } = useEditTaskModal();
 
     return (
-        <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
-          <CreateTaskFormWrapper onCancel={close} />
+        <ResponsiveModal open={!!taskId} onOpenChange={close}>
+          {taskId && (
+           <EditTaskFormWrapper id={taskId} onCancel={close} />
+        )}
         </ResponsiveModal>
     );
 };
