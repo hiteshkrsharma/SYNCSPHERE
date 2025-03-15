@@ -3,10 +3,15 @@ import { Project } from "@/features/projects/types";
 import { cn } from "@/lib/utils";
 import { TaskStatus } from "../types";
 
+<<<<<<< HEAD
 import { useRouter } from "next/navigation";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+=======
+import { MemberAvatar } from "@/features/members/components/member-avatar";
+import { ProjectAvatar } from "@/features/projects/components/project-avatar";
+>>>>>>> 5bbbd8c75ca356dfa87dbdfc63a813e5433ec4c3
 
 interface EventCardProps {
     title: string;
@@ -31,6 +36,7 @@ export const EventCard = ({
     status,
     id,
 }: EventCardProps) => {
+<<<<<<< HEAD
 
     const workspaceId = useWorkspaceId();
     const router = useRouter();
@@ -46,6 +52,11 @@ export const EventCard = ({
     return (
         <div className="px-2">
             <div onClick={onClick} className={cn(
+=======
+    return (
+        <div className="px-2">
+            <div className={cn(
+>>>>>>> 5bbbd8c75ca356dfa87dbdfc63a813e5433ec4c3
                 "p-1.5 text-xs bg-white text-primary border rounded-md border-l-4 flex flex-col gap-y-1.5 cursor-pointer hover:opacity-75 transition",
                 statusColorMap[status]
             )}>
