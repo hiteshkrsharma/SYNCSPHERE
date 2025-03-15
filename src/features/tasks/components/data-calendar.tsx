@@ -1,8 +1,5 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-=======
->>>>>>> 5bbbd8c75ca356dfa87dbdfc63a813e5433ec4c3
 import {
     format,
     getDay,
@@ -15,10 +12,7 @@ import { enUS } from "date-fns/locale";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 
 import { Task } from "../types";
-<<<<<<< HEAD
 import { Button } from "@/components/ui/button";
-=======
->>>>>>> 5bbbd8c75ca356dfa87dbdfc63a813e5433ec4c3
 
 import "./data-calendar.css";
 import { EventCard } from "./event-card";
@@ -40,7 +34,6 @@ interface DataCalendarProps {
     data: Task[];
 };
 
-<<<<<<< HEAD
 interface CustomToolbarProps {
     date: Date;
     onNavigate: ( action: "PREV" | "NEXT" | "TODAY") => void;
@@ -71,8 +64,6 @@ const CustomToolbar = ({ date, onNavigate }: CustomToolbarProps) => {
     )
 }
 
-=======
->>>>>>> 5bbbd8c75ca356dfa87dbdfc63a813e5433ec4c3
 export const DataCalendar = ({
     data,
 }: DataCalendarProps) => {
@@ -123,12 +114,9 @@ export const DataCalendar = ({
                         project={event.project}
                         status={event.status}
                     />
-<<<<<<< HEAD
                 ),
                 toolbar: () => (
                     <CustomToolbar date={value} onNavigate={handleNavigate} />
-=======
->>>>>>> 5bbbd8c75ca356dfa87dbdfc63a813e5433ec4c3
                 )
             }}
         />
