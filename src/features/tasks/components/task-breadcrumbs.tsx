@@ -46,7 +46,7 @@ export const TaskBreadcrumbs = ({
 
     return (
         <div className="flex items-center gap-x-2">
-            <ConfirmDialog />
+            <ConfirmDialog /> 
             <ProjectAvatar 
                 name={project.name}
                 image={project.imageUrl}
