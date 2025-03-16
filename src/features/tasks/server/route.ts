@@ -11,9 +11,10 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 import { getMember } from "@/features/members/utils";
 
 import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
+
 import { createAdminClient } from "@/lib/appwrite";
+
 import { Project } from "@/features/projects/types";
-import { error } from "console";
 
 
 const app = new Hono()
