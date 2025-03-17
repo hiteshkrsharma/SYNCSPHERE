@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 
@@ -38,6 +38,7 @@ import { useConfirm } from "@/hooks/use-confirm";
 
 import { useDeleteWorkspace } from "../api/use-delete-workspace";
 import { toast } from "sonner";
+
 import { useResetInviteCode } from "../api/use-reset-invite-code";
 
 interface EditWorkspaceFormProps {
@@ -71,6 +72,15 @@ export const EditWorkspaceForm = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const  [fullInviteLink, setFullInviteLink] = useState('');
+
+  // Set the invite link only after component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFullInviteLink(`${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`);
+    }
+  }, [initialValues.$id, initialValues.inviteCode]);
+
   const form = useForm<z.infer<typeof updateWorkspaceSchema>>({
     resolver: zodResolver(updateWorkspaceSchema),
     defaultValues: {
@@ -92,8 +102,7 @@ export const EditWorkspaceForm = ({
         onSuccess: () => {
           window.location.href = "/";
         },
-      }
-    );
+      });
   };
 
   const handleResetInviteCode = async () => {
@@ -117,11 +126,6 @@ export const EditWorkspaceForm = ({
         form: finalValues,
         param: { workspaceId: initialValues.$id },
       },
-      {
-        onSuccess: () => {
-          form.reset();
-        },
-      }
     );
   };
 
@@ -132,13 +136,15 @@ export const EditWorkspaceForm = ({
     }
   };
 
-  const fullInviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
+  // const fullInviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
   const handleCopyInviteLink = () => {
-    navigator.clipboard
-      .writeText(fullInviteLink)
-      .then(() =>
-        toast.success("Invite link copied to clipboard successfully")
-      );
+    if (typeof navigator != 'undefined') {
+        navigator.clipboard
+        .writeText(fullInviteLink)
+        .then(() =>
+          toast.success("Invite link copied to clipboard successfully")
+        );
+    } 
   };
 
   return (
