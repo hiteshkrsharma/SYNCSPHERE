@@ -314,7 +314,7 @@ const app = new Hono()
       const incompleteTaskCount = thisMonthIncompleteTasks.total;
       const incompleteTaskDifference = incompleteTaskCount - lastMonthIncompleteTasks.total;
 
-      const thisMonthcompletedTasks = await databases.listDocuments(
+      const thisMonthCompletedTasks = await databases.listDocuments(
         DATABASE_ID,
         TASKS_ID,
         [
@@ -325,7 +325,7 @@ const app = new Hono()
         ]
       );
 
-      const lastMonthcompletedTasks = await databases.listDocuments(
+      const lastMonthCompletedTasks = await databases.listDocuments(
         DATABASE_ID,
         TASKS_ID,
         [
@@ -336,9 +336,52 @@ const app = new Hono()
         ]
       );
 
-      const completedTaskCount = thisMonthcompletedTasks.total;
-      const completedTaskDifference = completedTaskCount - lastMonthcompletedTasks.total;
+      const completedTaskCount = thisMonthCompletedTasks.total;
+      const completedTaskDiffernce = completedTaskCount - lastMonthCompletedTasks.total;
+
+      const thisMonthOverdueTasks = await databases.listDocuments(
+        DATABASE_ID,
+        TASKS_ID,
+        [
+          Query.equal("projectId", projectId),
+          Query.notEqual("status", TaskStatus.DONE),
+          Query.lessThan("dueDate", now.toISOString()),
+          Query.greaterThanEqual("$createdAt", thisMonthStart.toISOString()),
+          Query.lessThanEqual("$createdAt", thisMonthEnd.toISOString()),
+        ]
+      );
+
+      const lastMonthOverdueTasks = await databases.listDocuments(
+        DATABASE_ID,
+        TASKS_ID,
+        [
+          Query.equal("projectId", projectId),
+          Query.notEqual("status", TaskStatus.DONE),
+          Query.lessThan("dueDate", now.toISOString()),
+          Query.greaterThanEqual("$createdAt", lastMonthStart.toISOString()),
+          Query.lessThanEqual("$createdAt", lastMonthEnd.toISOString()),
+        ]
+      );
+
+      const overdueTaskCount = thisMonthOverdueTasks.total;
+      const overdueTaskDifference = overdueTaskCount - lastMonthOverdueTasks.total;
+
+      return c.json({
+        data: {
+          taskCount,
+          taskDifference,
+          assignedTaskCount,
+          assignedTaskDifference,
+          completedTaskCount,
+          completedTaskDiffernce,
+          incompleteTaskCount,
+          incompleteTaskDifference,
+          overdueTaskCount,
+          overdueTaskDifference,
+        },
+      });
     }
   )
 
+  
 export default app;
