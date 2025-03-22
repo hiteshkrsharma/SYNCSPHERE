@@ -43,7 +43,7 @@ const app = new Hono().get(
 
                 return {
                     ...member,
-                    name: user.name,
+                    name: user.name || user.email,
                     email: user.email,
                 }
             })
