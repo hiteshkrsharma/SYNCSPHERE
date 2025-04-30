@@ -1,5 +1,5 @@
-# Full-stack Jira 
-An end-to-end full-stack Jira clone that features workspaces, projects, epics, tasks, kanban boards, calendars, role-based access control, and more. Built with Next.js, Appwrite SDK, Shadcn UI, TailwindCSS, 
+# Full-stack SyncSphere
+An end-to-end full-stack syncsphere that features workspaces, projects, epics, tasks, kanban boards, calendars, role-based access control, and more. Built with Next.js, Appwrite SDK, Shadcn UI, TailwindCSS, 
 and integrated with Hono.js for API endpoints.
 
 ## Key Features
@@ -58,30 +58,12 @@ and integrated with Hono.js for API endpoints.
    Styling: TailwindCSS, Shadcn UI
    
    Hosting: Vercel (Frontend), Appwrite (Backend)
-### Installation:
-   To get started with the project locally, follow these steps:
 
-1. Clone the repository:
-   
-   bash
-   
-   Copy
-   
-   [git clone https://github.com/your-username/jira-clone.git]
-   
-   cd jira-clone
-3. Install dependencies:
-   bash
-   Copy
-   npm install
-4. Set up environment variables:
+
+### Set up environment variables:
    
    Create a .env.local file in the root of the project and add the following environment variables:
 
-   bash
-   
-   Copy
-   
    NEXT_PUBLIC_APPWRITE_URL=your-appwrite-url
    
    NEXT_PUBLIC_APPWRITE_PROJECT_ID=your-appwrite-project-id
@@ -97,15 +79,6 @@ and integrated with Hono.js for API endpoints.
    NEXT_PUBLIC_OAUTH_GITHUB_CLIENT_ID=your-oauth-github-client-id
    
    NEXT_PUBLIC_OAUTH_GITHUB_SECRET=your-oauth-github-secret
-6. Run the development server:
-   
-   bash
-   
-   Copy
-   
-   npm run dev
-   
-   Visit http://localhost:3000 to see the app in action.
 
 ## Usage:
 
